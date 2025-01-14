@@ -1,14 +1,17 @@
 import { drawPhotos, deletePhotos } from './render-thumbnails.js';
 import { debounce, takeRandomElements, createRandomGenerator } from './utils.js';
-import { photos } from './main.js';
+import { getPhotosMain } from './main.js';
 
 const TIMEOUT_DELAY = 500;
 const RANDOM_PHOTOS_LENGTH = 10;
+
 const FILTERS = {
-  'filter-default': () => photos,
-  'filter-random': () => takeRandomElements(photos, RANDOM_PHOTOS_LENGTH, createRandomGenerator(0, photos.length - 1)),
-  'filter-discussed': () => [...photos].sort((a, b) => b.comments.length - a.comments.length)
+  'filter-default': () => getPhotosMain(),
+  'filter-random': () => takeRandomElements(getPhotosMain(), RANDOM_PHOTOS_LENGTH, createRandomGenerator(0, getPhotosMain().length - 1)),
+  'filter-discussed': () => [...getPhotosMain()].sort((a, b) => b.comments.length - a.comments.length)
 };
+
+
 const BUTTON_ACTIVITY_CLASS = 'img-filters__button--active';
 
 const imgFilters = document.querySelector('.img-filters');
