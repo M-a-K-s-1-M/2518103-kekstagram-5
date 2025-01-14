@@ -6,6 +6,8 @@ import { alertLoadError } from './utils.js';
 
 let photos = [];
 
+const getPhotosMain = () => photos.slice();
+
 const onLoadSuccess = (data) => {
   photos = data.slice();
   drawPhotos(photos);
@@ -16,4 +18,4 @@ getPhotos(onLoadSuccess, alertLoadError);
 addFilters();
 setFormSubmit();
 
-export { photos };
+export { getPhotosMain };
